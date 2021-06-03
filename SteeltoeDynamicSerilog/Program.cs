@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Steeltoe.Extensions.Logging.DynamicSerilog;
+using Steeltoe.Management.Endpoint;
 
 namespace SteeltoeDynamicSerilog
 {
@@ -18,6 +21,8 @@ namespace SteeltoeDynamicSerilog
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .AddDynamicSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration))
+                .AddLoggersActuator()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
