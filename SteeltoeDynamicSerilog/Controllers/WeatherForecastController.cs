@@ -26,6 +26,13 @@ namespace SteeltoeDynamicSerilog.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogTrace("Logging at level {@LogLevel}", LogLevel.Trace);
+            _logger.LogDebug("Logging at level {@LogLevel}", LogLevel.Debug);
+            _logger.LogInformation("Logging at level {@LogLevel}", LogLevel.Information);
+            _logger.LogWarning("Logging at level {@LogLevel}", LogLevel.Warning);
+            _logger.LogError("Logging at level {@LogLevel}", LogLevel.Error);
+            _logger.LogCritical("Logging at level {@LogLevel}", LogLevel.Critical);
+            
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
